@@ -97,7 +97,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
               ),
               //have account or not
-              SizedBox(height: config.height10,),
+              SizedBox(height: config.height20,),
               InkWell(
                 onTap: (){
                   setState((){
@@ -108,42 +108,7 @@ class _AuthPageState extends State<AuthPage> {
                 'Don\'t have an account!' :
                 'Already have an account!',color: AppColors.paraColor,),
               ),
-              //use another ways
-              SizedBox(height: config.height20,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: config.width30*2),
-                child: Row(
-                  children: [
-                    Expanded(child: Divider(color: AppColors.paraColor,thickness: 1,)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: config.width10),
-                      child: BigText(text: 'OR',color: AppColors.paraColor,),
-                    ),
-                    Expanded(child: Divider(color: AppColors.paraColor,thickness: 1,)),
 
-                  ],
-                ),
-              ),
-              SizedBox(height: config.height20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: config.height10*5,
-                    width: config.height10*5,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('assets/images/facebook.png'),fit: BoxFit.cover)
-                    ),
-                  ),
-                  Container(
-                    height: config.height45,
-                    width: config.height45,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('assets/images/google.png'),fit: BoxFit.cover)
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
         ),

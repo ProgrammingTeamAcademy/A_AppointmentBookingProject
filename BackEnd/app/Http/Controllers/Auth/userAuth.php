@@ -11,21 +11,21 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class userAuth extends Controller
 {
-    public function login_email(Request $request)
+    public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'phone' => 'required|numeric',
             'password' => 'required',
             //'user_name' => 'required'
         ]);
-        $user = User::where('email', $request->email);
+        $user = User::where('phone', $request->phone);
         if (!$user->exists()) {
             return Response()->json([
-                'massge' => 'لايوجد حساب لهذا الايميل ',
+                'massge' => 'لايوجد حساب لهذا الهاتف ',
             ], 201);
         }
 
-        if (!auth()->attempt($request->only('email', 'password'))) {
+        if (!auth()->attempt($request->only('phone', 'password'))) {
             throw new AuthenticationException("كلمة السر غلط");
         }
         // else if (!auth()->attempt($request->only('email,password'))) {
@@ -44,15 +44,15 @@ class userAuth extends Controller
     {
         $this->validate($request, [
 
-            'email' => 'required|email',
+            // 'email' => 'required|email',
 
-            'password' => 'required',
-            'phone' => 'required|numeric|digits_between:10,15',
+            'password' => 'required|min:6',
+            'phone' => 'required|numeric|digits_between:9,15',
             'name' => 'required'      //'user_name' => 'required')
         ]);
         $doctor = User::create([
 
-            'email' => $request->email,
+            'phone' => $request->phone,
             'name' => $request->name,
             'password' => bcrypt($request->password),
 
@@ -75,7 +75,7 @@ class userAuth extends Controller
 
         if (
             //!$token
-            //|| 
+            //||
             Hash::check(
                 $hashedToken,
                 $t

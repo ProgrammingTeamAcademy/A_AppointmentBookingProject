@@ -1,3 +1,5 @@
+import 'package:appointment_booking/components/snack_bar.dart';
+import 'package:appointment_booking/controller/auth_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:appointment_booking/components/bigtext.dart';
@@ -18,12 +20,39 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   bool _isLogin = true;
+  // String error = '';
+  TextEditingController error = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
+  void fieldRegisterCheck(){
+    var name = nameController.text.trim();
+    var password = passwordController.text.trim();
+    var phone = phoneController.text.trim();
+    var authController = Get.find<AuthController>();
+    if(name.isEmpty){
+        error.text = 'Name can\'t be empty';
+    }else if(phone.isEmpty){
+        error.text = 'Phone can\'t be empty';
+    }else if(password.isEmpty){
+        error.text = 'Password can\'t be empty';
+    }else if(password.length<6){
+        error.text = 'Password shouldn\'t be less than 6 characters';
+    }else{
+      var res = authController.Register(name, password, phone);
+      if(res == 'Internal Server Error'){
+        error.text = 'Phone number already exist';
+      }
+    }
+  }
 
+  void fieldLoginCheck(){
+    var phone = phoneController.text.trim();
+    var password = passwordController.text.trim();
+    var authController = Get.find<AuthController>();
+      authController.login(phone, password);
+  }
 
 
   @override
@@ -80,11 +109,25 @@ class _AuthPageState extends State<AuthPage> {
                   :SizedBox(height: config.height20,),
               _isLogin?
               LoginPage(passwordController: passwordController, phoneController: phoneController)
-                  :SignupPage(emailController: emailController,nameController: nameController,passwordController: passwordController,phoneController: phoneController,),
+                  :SignupPage(nameController: nameController,passwordController: passwordController,phoneController: phoneController,),
               //button
               SizedBox(height: config.height20,),
+              error.text.isNotEmpty ? Container(
+                padding: EdgeInsets.symmetric(horizontal: config.width10*5),
+                alignment: Alignment.centerLeft,
+                child: SmallText(text: error.text,color: Colors.red,
+                size: config.font14,),
+              ):Container(),
+              SizedBox(height: config.height20,),
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  setState((){
+                    error.clear();
+                  });
+                  _isLogin?
+                  fieldLoginCheck():
+                  fieldRegisterCheck();
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: config.width20,vertical: config.height10),
                   decoration: BoxDecoration(
@@ -101,6 +144,7 @@ class _AuthPageState extends State<AuthPage> {
               InkWell(
                 onTap: (){
                   setState((){
+                    error.clear();
                     _isLogin = !_isLogin;
                   });
                 },

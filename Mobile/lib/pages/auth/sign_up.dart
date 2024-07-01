@@ -3,12 +3,11 @@ import 'package:appointment_booking/components/config.dart';
 import 'package:appointment_booking/components/text_form_field.dart';
 
 class SignupPage extends StatelessWidget {
-  var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
 
-  SignupPage({super.key, required this.emailController,
+  SignupPage({super.key,
     required this.passwordController,required this.nameController,required this.phoneController,});
 
   @override

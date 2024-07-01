@@ -62,7 +62,7 @@ Route::controller(doctorAuth::class,)->prefix("Doctor")
     );
 Route::controller(userAuth::class,)->prefix("User")->group(
     function () {
-        Route::post('auth/login_email',  'login_email');
+        Route::post('auth/login',  'login');
         Route::post('auth/register',  'register');
         Route::middleware('auth:sanctum')->get(
             '/get_info',
@@ -72,15 +72,12 @@ Route::controller(userAuth::class,)->prefix("User")->group(
             // }
         );
         Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
-
             $request->user()->currentAccessToken()->delete();
-
             return response()->json(['message' => ' تم نسجيل الخروج'], 200);
         });
+
         Route::middleware('auth:sanctum')->post('/logout_all', function (Request $request) {
-
             $request->user()->tokens()->delete();
-
             return response()->json(['message' => 'تم تسجيل الخروج من جميع الحسابات'], 200);
         });
     }

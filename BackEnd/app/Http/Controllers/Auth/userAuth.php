@@ -21,7 +21,7 @@ class userAuth extends Controller
         $user = User::where('phone', $request->phone);
         if (!$user->exists()) {
             return Response()->json([
-                'massge' => 'لايوجد حساب لهذا الهاتف ',
+                'massge' => 'There is no account',
             ], 201);
         }
 

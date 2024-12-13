@@ -55,6 +55,7 @@ class config {
 
   static double font14 = screenHeight/60.29;
   static double font16 = screenHeight/52.75;
+  static double font18 = screenHeight/46.89;
   static double font20 = screenHeight/42.2;
   static double font22 = screenHeight/38.36;
   static double font24 = screenHeight/35.17;

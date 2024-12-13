@@ -43,6 +43,7 @@ class _AuthPageState extends State<AuthPage> {
       if(authController.isRegistered == false){
         errorText.text = 'Phone number already exist';
       }
+
     }
   }
 
@@ -67,100 +68,97 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        // physics: BouncingScrollPhysics(),
-        child: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.only(top: config.height10*4,bottom: config.height10*2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              //logo
-              Container(
-                height: config.height45*5,
-                width: config.height45*4,
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage('assets/images/338.jpg'),fit: BoxFit.cover)
-                ),
-              ),
-              //if login page
-              _isLogin?
-              Column(
+      body: GetBuilder<AuthController>(
+        builder: (authController){
+          return SingleChildScrollView(
+            // physics: BouncingScrollPhysics(),
+            child: Container(
+              width: double.maxFinite,
+              padding: EdgeInsets.only(top: config.height10*4,bottom: config.height10*2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: config.height20,),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: config.width20),
-                    child: Row(
-                      children: [
-                        Text('Welcome again',style: TextStyle(
-                            color: Colors.black54,fontSize: config.font20*1.5,fontWeight: FontWeight.w600
-                        ),),
-                      ],
+                  //logo
+                  Container(
+                    height: config.height45*5,
+                    width: config.height45*4,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage('assets/images/338.jpg'),fit: BoxFit.cover)
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(left: config.width20*9),
-                  //   child: Row(
-                  //     children: [
-                  //       Text('back',style: TextStyle(
-                  //           color: AppColors.paraColor,fontSize: config.font20*2.5,fontWeight: FontWeight.w600
-                  //       ),),
-                  //     ],
-                  //   ),
-                  // ),
-                ],
-              ):
-              Container(),
-              //body
-              _isLogin?
-              SizedBox(height: config.height20*2,)
-                  :SizedBox(height: config.height20,),
-              _isLogin?
-              LoginPage(passwordController: passwordController, phoneController: phoneController)
-                  :SignupPage(nameController: nameController,passwordController: passwordController,phoneController: phoneController,),
-              //button
-              errorText.text.isNotEmpty? SizedBox(height: config.height20,):Container(),
-              errorText.text.isNotEmpty? Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(horizontal: config.width10*5),
-                child: SmallText(text: errorText.text.trim(),
-                color: Colors.redAccent,size: config.font14,),
-              ):Container(),
-              SizedBox(height: config.height20,),
-              GestureDetector(
-                onTap: (){
-                  setState((){
-                    errorText.clear();
-                  });
-                  _isLogin? fieldLoginCheck(): fieldRegisterCheck();
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: config.width20,vertical: config.height10),
-                  decoration: BoxDecoration(
-                      color: AppColors.mainColor,
-                      borderRadius: BorderRadius.circular(config.radius20)
+                  //if login page
+                  _isLogin?
+                  Column(
+                    children: [
+                      SizedBox(height: config.height20,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: config.width20),
+                        child: Row(
+                          children: [
+                            Text('Welcome again',style: TextStyle(
+                                color: Colors.black54,fontSize: config.font20*1.5,fontWeight: FontWeight.w600
+                            ),),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ):
+                  Container(),
+                  //body
+                  _isLogin?
+                  SizedBox(height: config.height20*2,)
+                      :SizedBox(height: config.height20,),
+                  _isLogin?
+                  LoginPage(passwordController: passwordController, phoneController: phoneController)
+                      :SignupPage(nameController: nameController,passwordController: passwordController,phoneController: phoneController,),
+                  //button
+                  errorText.text.isNotEmpty? SizedBox(height: config.height20,):Container(),
+                  errorText.text.isNotEmpty? Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.symmetric(horizontal: config.width10*5),
+                    child: SmallText(text: errorText.text.trim(),
+                      color: Colors.redAccent,size: config.font14,),
+                  ):Container(),
+                  SizedBox(height: config.height20,),
+                  GestureDetector(
+                    onTap: (){
+                      setState((){
+                        errorText.clear();
+                      });
+                      _isLogin? fieldLoginCheck(): fieldRegisterCheck();
+                    },
+                    child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: config.width20,vertical: config.height10/1.5),
+                        height: config.height45,width: config.width45*3,
+                        decoration: BoxDecoration(
+                            color: AppColors.mainColor,
+                            borderRadius: BorderRadius.circular(config.radius20)
+                        ),
+                        child: !authController.isLoading?Center(
+                          child: BigText(
+                            text:_isLogin?'Log in':'Sign up',color: Colors.white,
+                          ),
+                        ):Center(child: CircularProgressIndicator(color: Colors.white,))
+                    ),
                   ),
-                  child: BigText(
-                    text:_isLogin?'Log in':'Sign up',color: Colors.white,
-                  )
-                ),
+                  //have account or not
+                  SizedBox(height: config.height10,),
+                  InkWell(
+                    onTap: (){
+                      setState((){
+                        errorText.clear();
+                        _isLogin = !_isLogin;
+                      });
+                    },
+                    child: SmallText(text: _isLogin?
+                    'Don\'t have an account!' :
+                    'Already have an account!',color: AppColors.paraColor,),
+                  ),
+                ],
               ),
-              //have account or not
-              SizedBox(height: config.height10,),
-              InkWell(
-                onTap: (){
-                  setState((){
-                    errorText.clear();
-                    _isLogin = !_isLogin;
-                  });
-                },
-                child: SmallText(text: _isLogin?
-                'Don\'t have an account!' :
-                'Already have an account!',color: AppColors.paraColor,),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       )
     );
   }

@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\AppointmentsController;
+use App\Http\Controllers\Api\ClinicController;
+use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\DoctorClinicController;
+use App\Http\Controllers\Api\DoctorController;
+use App\Http\Controllers\Api\FavDoctorController;
+use App\Http\Controllers\Api\ProvinceController;
+use App\Http\Controllers\Api\SpecialistController;
 use App\Http\Controllers\Auth\adminAuth;
 use App\Http\Controllers\Auth\doctorAuth;
 use App\Http\Controllers\Auth\userAuth;
@@ -71,6 +79,13 @@ Route::controller(userAuth::class,)->prefix("User")->group(
             //return $request->user();
             // }
         );
+        Route::middleware('auth:sanctum')->put(
+            '/update',
+            'update'
+            // function (Request $request) {
+            //return $request->user();
+            // }
+        );
         Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
             $request->user()->currentAccessToken()->delete();
             return response()->json(['message' => ' تم نسجيل الخروج'], 200);
@@ -121,3 +136,14 @@ Route::controller(adminAuth::class)->prefix('admin')->group(
         },
     ),
 );
+
+Route::apiResource('clinic',ClinicController::class)->only('index','show');
+Route::apiResource('doctor',DoctorController::class)->only('index','show');
+Route::apiResource('doctor_clinic',DoctorClinicController::class)->only('index','show');
+Route::apiResource('country.province',ProvinceController::class)->only('show');
+Route::apiResource('country',CountryController::class)->only('index');
+Route::apiResource('specialist',SpecialistController::class)->only('index');
+Route::apiResource('appointment',AppointmentsController::class);
+Route::apiResource('doctor/{doctor}/fav',FavDoctorController::class)->only('store');
+Route::apiResource('fav',FavDoctorController::class)->only('index');
+Route::apiResource('province',ProvinceController::class)->only('index');

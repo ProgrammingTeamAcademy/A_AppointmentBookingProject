@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -92,7 +93,7 @@ class userAuth extends Controller
 
         return Response()->json([
             'info' => $request->user(),
-            'my_name' => $token->name,
+            'token' => $mytoken,
 
 
             //'now_name'=>
@@ -104,5 +105,22 @@ class userAuth extends Controller
 
 
 
+    }
+
+    public function update(Request $request){
+        $user = User::where('id',Auth::user()->id)->first();
+
+
+    $user->update([
+        'id' => Auth::user()->id,
+        'name' => $request['name'] ?? $user['name'],
+        'phone' => $request['phone']?? $user['phone'],
+        'province_id' => $request['province_id']?? $user['province_id']
+    ]);
+
+
+    return Response()->json([
+        'message' => 'User info updated successfully'
+    ], 200);
     }
 }

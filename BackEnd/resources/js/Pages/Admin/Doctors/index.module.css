@@ -1,0 +1,82 @@
+.table {
+    width: 100%;
+    font-size: small;
+    text-align: left;
+    color: gray;
+}
+
+.headtable {
+    font-size: small;
+    color: gainsboro;
+    background-color: gray;
+    text-transform: uppercase;
+}
+
+.tableheadtr {
+    text-wrap: nowrap;
+}
+.tableht {
+    padding: 3px 5px;
+}
+
+.tabletd {
+    padding: 5px 5px;
+}
+.tabletdname {
+    padding: 5px 5px;
+    color: white;
+}
+
+.tabletdname:hover {
+    text-decoration: underline;
+}
+
+.editlink {
+    color: blue;
+    font-size: small;
+    margin: 0px 2px;
+}
+
+.editlink:hover {
+    text-decoration: underline;
+}
+
+.deletelink {
+    color: white;
+    padding: 2px 4px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: red;
+    font-size: small;
+    margin: 0px 2px;
+}
+
+.deletelink:hover {
+    text-decoration: underline;
+}
+
+.hheader {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+.addnew {
+    font-weight: 500;
+    border: none;
+    font-size: 16px;
+    background-color: green;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(24, 138, 24);
+    border-radius: 5px;
+}

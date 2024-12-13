@@ -1,0 +1,96 @@
+.switch {
+    display: flex;
+    justify-content: space-evenly;
+    border: none;
+    margin-top: 4px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.selected {
+    color: rgb(0, 0, 0);
+    background-color: rgb(17, 22, 44);
+    padding: 7px 35px;
+    border-radius: 25px;
+    color: white;
+}
+
+.unSelected {
+    padding: 7px 15px;
+    color: black;
+}
+
+.con {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+.con > div {
+    width: 50%;
+    height: 100vh;
+    max-width: 50%;
+}
+.divI {
+    height: 100%;
+    width: 50%;
+    margin-inline: 5px;
+    object-fit: cover;
+    right: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.divImg {
+    height: 100%;
+    width: 50%;
+    object-fit: cover;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.head {
+    /* padding-top: 20px;
+    padding-left: 30px; */
+    width: 40%;
+    position: absolute;
+    top: -1%;
+    display: flex;
+    align-items: center;
+}
+.logo {
+    width: 100px;
+    text-wrap: nowrap;
+}
+@media only screen and (max-width: 767px) {
+    .logo {
+        display: none;
+    }
+    .head {
+        top: 5%;
+        left: 2%;
+    }
+}
+
+.head a {
+    text-wrap: nowrap;
+    margin-right: 10px;
+    /* font-size: 100%; */
+    font-weight: 400;
+    color: rgb(17, 22, 44);
+}
+
+.head a:hover {
+    color: black;
+}

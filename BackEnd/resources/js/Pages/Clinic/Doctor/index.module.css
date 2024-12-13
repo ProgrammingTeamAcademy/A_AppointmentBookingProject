@@ -1,0 +1,74 @@
+* {
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.doctorCard {
+    height: 22.5em;
+    width: 80%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 5%;
+    margin-top: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.imgg {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.imgg img {
+    width: 125px;
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 4px;
+    /* text-wrap: nowrap; */
+    display: flex;
+    justify-content: center;
+}
+.specialist {
+    font-size: 16px;
+    padding-top: 4px;
+    text-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+}
+.shortDes {
+    font-size: 16px;
+    padding-top: 4px;
+    display: flex;
+    justify-content: center;
+}
+.btn {
+    font-size: 12px;
+    margin-top: 10px;
+    border: 1.5px solid #22c55e;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btnCon {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.new {
+    margin-right: 50px;
+    padding: 5px 8px;
+    background-color: #25db68;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}

@@ -19,16 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
-        'user_name',
-        'name',
         'phone',
-
-        'remember_token'
-
+        'email',
+        'province_id',
     ];
-
+    protected $appends = ['province','country_name'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -37,7 +32,9 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'email',
         'remember_token',
+        'email_verified_at'
     ];
 
     /**
@@ -48,4 +45,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Province(){
+        return $this->belongsTo(Province::class);
+    }
+
+    public function appointments(){
+        return $this->hasMany(Appointments::class);
+    }
+
+    public function favDoctors(){
+        return $this->hasMany(FavDoctor::class);
+    }
+
+    public function getProvinceAttribute(){
+        return $this->Province()->where('id',$this->province_id)->first()->province_name ?? '';
+    }
+
+    public function getCountryNameAttribute(){
+        return $this->Province()->where('id',$this->province_id)->first()->country ?? '';
+    }
 }

@@ -3,6 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\admin;
+use App\Models\Clinic;
+use App\Models\doctor;
+use App\Models\Specialist;
+use Database\Factories\AdminFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //        \App\Models\User::factory(1)->create();
+        //  $this->call([CountrySeeder::class,ProvinceSeeder::class]);
 
-        \App\Models\User::factory()->create([
-            'name' => 'halwa1', 'email' => 'halwadev@gmail.com',
-            'user_name' => 'halwa'
-        ]);
+
+
+        doctor::factory()->create();
+
     }
 }

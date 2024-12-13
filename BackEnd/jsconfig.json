@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/*"],
+            "ziggy-js": ["./vendor/tightenco/ziggy"]
+        }
+    },
+    "exclude": ["node_modules", "public"],
+    "typeRoots": [
+        "../node_modules/@types",
+        "../@types",
+        "../node_modules/react-country-state-city"
+    ]
+}
